@@ -35,7 +35,7 @@ function getNoteTemplate(image, index) {
 
 function createEventListenersForImages() {
     const imgElements = imagesContainer.querySelectorAll("img");
-    console.log("imgElements:", imgElements);
+   
     // Add event listeners to each image for keyboard navigation and click events
     imgElements.forEach((img) => {
         img.addEventListener("keydown",(event) => {
@@ -50,9 +50,9 @@ function createEventListenersForImages() {
     });
 }
  
-function openDialog(item) {
-    currentImageId = Number(item.id); 
-     createDialog(item);
+function openDialog(index) {
+    currentImageId =index; 
+     createDialog(index);
       dialog.showModal();
 }
 
