@@ -1,6 +1,7 @@
 const imagesContainer =document.getElementById("content");
 const dialog = document.getElementById("dialogContent");
 
+
 let currentImageId = null;
 let images =[
     'eagle.jpg',
@@ -28,9 +29,8 @@ function displayImages(){
 
 function getNoteTemplate(image, index) {
     return`
-      <img src="./img/${image}" class="img-thumbnail" 
-      id="${index}"  alt="${image.slice(0, -4)}" 
-     role="button"/> 
+      <button id="my-button" tabindex="-1" ><img src="./img/${image}" class="img-thumbnail"  tabindex="0"
+      id="${index}"  alt="${image.slice(0, -4)}" />
      `;  
 }
 
@@ -70,18 +70,27 @@ function getDialogTemplate(item) {
     return`
     <div class="inner-dialog">
       <button class="close" onclick="closeDialog()" aria-label="Ansicht Schließen">&times;</button>
-      ${item.outerHTML}
+      
+    <img 
+        src="${item.src}" 
+        alt="${item.alt}" 
+        class="dialog-image"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+
       <div class="next-and-prev-buttons">
-        <button class="prev-image" id="prev" onclick="prevImage(${item.id})" aria-label="vorheriges Bild">
-          <img src="./icon/arrow.png" aria-labelledby="next" class="arrow next" id="nextArrow" 
+        <button class="prev-image" onclick="prevImage(${item.id})" aria-label="vorheriges Bild">
+        <img src="./icon/arrow.png" aria-labelledby="next" class="arrow next" id="nextArrow" 
             alt="Next Image">
         </button>
-        <button class="next-image" id="next" onclick="nextImage(${item.id})" aria-label="nächstes Bild">
-          <img src="./icon/arrow.png" aria-labelledby="next" class="arrow prev" id="nextArrow" 
+    
+        <button class="next-image" onclick="nextImage(${item.id})" aria-label="nächstes Bild">
+         <img src="./icon/arrow.png" aria-labelledby="next" class="arrow prev" id="nextArrow" 
             alt="Next Image">
         </button>
       </div>
-  </div>
+    </div>
     `;
 }
 
@@ -137,3 +146,5 @@ document.addEventListener("keydown", (event) => {
         closeDialog();
     }
 });
+
+
