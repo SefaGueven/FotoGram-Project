@@ -1,5 +1,6 @@
 const imagesContainer =document.getElementById("content");
 const dialog = document.getElementById("dialogContent");
+const overlay = document.getElementById("overlay");
 let currentImageId = null;
 let images =[
     'eagle.jpg',
@@ -53,8 +54,11 @@ function createEventListenersForImages() {
 function openDialog(index) {
     currentImageId =index; 
      createDialog(index);
+      document.body.style.overflow = "hidden"; // Hintergrund-Scroll sperren 
+      overlay.classList.add("active");
       dialog.showModal();
 }
+
 
 let createDialog = (item) => {
     dialog.innerHTML="";
@@ -91,6 +95,8 @@ function closeDialogOnClickOutside(event) {
 function closeDialog() {
     if (dialog.open) {
         dialog.close();
+        overlay.classList.remove("active");
+        document.body.style.overflow = ""; // Scroll wieder erlauben
         dialog.innerHTML ="";
     }
 }
