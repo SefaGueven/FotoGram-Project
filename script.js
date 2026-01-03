@@ -51,14 +51,15 @@ function createEventListenersForImages() {
     });
 }
  
-function openDialog(index) {
-    currentImageId =index; 
-     createDialog(index);
+function openDialog(img) {
+    currentImageId = parseInt(img.id, 10);
+     createDialog(img);
       document.body.style.overflow = "hidden"; // Hintergrund-Scroll sperren 
       overlay.classList.add("active");
       dialog.showModal();
 
 }
+
 
 
 let createDialog = (item) => {
@@ -70,19 +71,17 @@ function getDialogTemplate(item) {
     return`
     <div class="inner-dialog">
       <button class="close" onclick="closeDialog()" aria-label="Ansicht Schließen">&times;</button>
+        
       
-    <img 
-        src="${item.src}" 
-        alt="${item.alt}" 
-        class="dialog-image"
-        tabindex="-1"
-        aria-hidden="true"
-      >
 
-      <div class="next-and-prev-buttons">
+    <img src="${item.src}" alt="${item.alt}" class="dialog-image"tabindex="-1" aria-hidden="true">
+
+       
+
+     <div class="next-and-prev-buttons">
         <button class="prev-image" onclick="prevImage(${item.id})" aria-label="vorheriges Bild">
         <img src="./icon/arrow.png" aria-labelledby="next" class="arrow next" id="nextArrow" 
-            alt="Next Image">
+            alt="Prev Image">
         </button>
     
         <button class="next-image" onclick="nextImage(${item.id})" aria-label="nächstes Bild">
@@ -90,7 +89,12 @@ function getDialogTemplate(item) {
             alt="Next Image">
         </button>
       </div>
+
+       <div class="page-counter">
+        ${currentImageId + 1} / ${images.length}
+        </div>
     </div>
+    
     `;
 }
 

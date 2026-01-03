@@ -66,6 +66,13 @@ h1{
     cursor: pointer;
 }
 
+.page-counter {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.8;
+}
+
 footer {
     background-color: var(--primary-color);
     padding: 20px;
