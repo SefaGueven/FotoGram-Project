@@ -1,6 +1,6 @@
 const imagesContainer =document.getElementById("content");
 const dialog = document.getElementById("dialogContent");
-const overlay = document.getElementById("overlay");
+
 let currentImageId = null;
 let images =[
     'eagle.jpg',
@@ -29,7 +29,7 @@ function displayImages(){
 function getNoteTemplate(image, index) {
     return`
       <img src="./img/${image}" class="img-thumbnail" 
-      id="${index}" tabindex="0" alt="${image.slice(0, -4)}" 
+      id="${index}"  alt="${image.slice(0, -4)}" 
      role="button"/> 
      `;  
 }
@@ -57,6 +57,7 @@ function openDialog(index) {
       document.body.style.overflow = "hidden"; // Hintergrund-Scroll sperren 
       overlay.classList.add("active");
       dialog.showModal();
+
 }
 
 
