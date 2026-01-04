@@ -1,7 +1,6 @@
 const imagesContainer =document.getElementById("content");
 const dialog = document.getElementById("dialogContent");
 
-
 let currentImageId = null;
 let images =[
     'eagle.jpg',
@@ -18,7 +17,6 @@ let images =[
     'orangefish.jpg',
     'passion-fruit.jpg',
 ];
-
 function displayImages(){
     imagesContainer.innerHTML = "";
     images.forEach((image, index) => {
@@ -26,17 +24,14 @@ function displayImages(){
     createEventListenersForImages();
 });
 }
-
 function getNoteTemplate(image, index) {
     return`
-      <button id="my-button" tabindex="-1" ><img src="./img/${image}" class="img-thumbnail"  tabindex="0"
+      <button class="my-button" tabindex="-1" ><img src="./img/${image}" class="img-thumbnail"  tabindex="0"
       id="${index}"  alt="${image.slice(0, -4)}" />
      `;  
 }
-
 function createEventListenersForImages() {
     const imgElements = imagesContainer.querySelectorAll("img");
-   
     // Add event listeners to each image for keyboard navigation and click events
     imgElements.forEach((img) => {
         img.addEventListener("keydown",(event) => {
@@ -50,7 +45,6 @@ function createEventListenersForImages() {
         });
     });
 }
- 
 function openDialog(img) {
     currentImageId = parseInt(img.id, 10);
      createDialog(img);
@@ -59,52 +53,37 @@ function openDialog(img) {
       dialog.showModal();
 
 }
-
-
-
 let createDialog = (item) => {
-    dialog.innerHTML="";
-    dialog.innerHTML += getDialogTemplate(item);
+    dialog.innerHTML = getDialogTemplate(item);
+   
 }
 
 function getDialogTemplate(item) {
     return`
     <div class="inner-dialog">
-      <button class="close" onclick="closeDialog()" aria-label="Ansicht Schließen">&times;</button>
-        
-      
-
-    <img src="${item.src}" alt="${item.alt}" class="dialog-image"tabindex="-1" aria-hidden="true">
-
-       
-
-     <div class="next-and-prev-buttons">
+    <button class="close" onclick="closeDialog()" aria-label="Ansicht Schließen">&times;</button>
+        <img src="${item.src}" alt="${item.alt}" class="dialog-image"tabindex="-1" aria-hidden="true">
+        <div class="next-and-prev-buttons">
         <button class="prev-image" onclick="prevImage(${item.id})" aria-label="vorheriges Bild">
         <img src="./icon/arrow.png" aria-labelledby="next" class="arrow next" id="nextArrow" 
             alt="Prev Image">
-        </button>
-    
-        <button class="next-image" onclick="nextImage(${item.id})" aria-label="nächstes Bild">
-         <img src="./icon/arrow.png" aria-labelledby="next" class="arrow prev" id="nextArrow" 
-            alt="Next Image">
-        </button>
+    </button>
+    <button class="next-image" onclick="nextImage(${item.id})" aria-label="nächstes Bild">
+        <img src="./icon/arrow.png" aria-labelledby="next" class="arrow prev" id="nextArrow" 
+        alt="Next Image">
+    </button>
       </div>
-
-       <div class="page-counter">
+    <div class="page-counter">
         ${currentImageId + 1} / ${images.length}
         </div>
-    </div>
-    
-    `;
+    </div>`;
 }
-
 // Check if the click is outside the dialog
 function closeDialogOnClickOutside(event) {
     if (event.target==dialog) {
         closeDialog();
     }
 }
-
 // check if the dialog is open before trying to close it
 function closeDialog() {
     if (dialog.open) {
@@ -114,7 +93,6 @@ function closeDialog() {
         dialog.innerHTML ="";
     }
 }
-
 // showing next and previous image onclick
 function nextImage(id) {
     let nextId = id + 1;
@@ -134,7 +112,6 @@ function prevImage(id) {
      const prevImage = document.getElementById(prevId); 
      createDialog(prevImage);
 }
-
 document.addEventListener("keydown", (event) => {
     if (!dialog.open) return;
 
